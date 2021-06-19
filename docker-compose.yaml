@@ -12,7 +12,7 @@ services:
          mode: replicated
          placement:
             constraints:
-              -node.role == worker
+              - node.role == worker
          replicas: 2
        entrypoint: ruby
        image: index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:1.0-hasher
@@ -25,7 +25,7 @@ services:
          mode: replicated
          placement:
             constraints:
-              -node.role == worker
+              - node.role == worker
             replicas: 1
        entrypoint: docker-entrypoint.sh
        image: redis:alpine
@@ -40,7 +40,7 @@ services:
          mode: replicated
          placement:
             constraints:
-              -node.role == worker
+              - node.role == worker
          replicas: 2
        entrypoint: python
        image: index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:1.0-rng
@@ -53,7 +53,7 @@ services:
          mode: replicated
          placement:
             constraints:
-              -node.role == worker
+              - node.role == worker
          replicas: 2
        entrypoint: node
        image: index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:1.0-webui
@@ -68,7 +68,7 @@ services:
           mode: replicated
           placement:
             constraints:
-              -node.role == worker
+              - node.role == worker
           replicas: 2
        entrypoint: python
        image: index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:1.0-worker
