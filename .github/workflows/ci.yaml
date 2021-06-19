@@ -10,13 +10,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: build-hasher
-        run: docker image build --file hasher/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-hasher hasher/
+        run: docker image build --file hasher/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:hasher hasher/
       - name: build-rng
-        run: docker image build --file rng/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-rng rng/
+        run: docker image build --file rng/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:rng rng/
       - name: build-webui
-        run: docker image build --file webui/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-webui webui/
+        run: docker image build --file webui/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:webui webui/
       - name: build-worker
-        run: docker image build --file worker/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-worker worker/
+        run: docker image build --file worker/Dockerfile --tag index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:worker worker/
       - name: network-hasher
         run: docker network create hasher-network
       - name: network-redis
@@ -26,16 +26,16 @@ jobs:
       - name: run-redis
         run: docker container run --detach --entrypoint docker-entrypoint.sh --name redis-test --network redis-network --volume redis-volume:/data --workdir /data redis:alpine redis-server
       - name: run-hasher
-        run: docker container run --detach --entrypoint ruby --name hasher-test --network hasher-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-hasher hasher.rb
+        run: docker container run --detach --entrypoint ruby --name hasher --network hasher-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:hasher hasher.rb
       - name: run-rng
-        run: docker container run --detach --entrypoint python --name rng-test --network rng-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-rng rng.py
+        run: docker container run --detach --entrypoint python --name rng --network rng-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:rng rng.py
       - name: run-webui
-        run: docker container run --detach --entrypoint node --name webui-test --network redis-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-webui webui.js
+        run: docker container run --detach --entrypoint node --name webui --network redis-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:webui webui.js
       - name: run-worker
-        run: docker container run --detach --entrypoint python --name worker-test --network redis-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:test-worker worker.py
+        run: docker container run --detach --entrypoint python --name worker --network redis-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:worker worker.py
       - name: connect-hasher
-        run: docker network connect hasher-network worker-test
+        run: docker network connect hasher-network worker
       - name: connect-rng
-        run: docker network connect rng-network worker-test
+        run: docker network connect rng-network worker
       - name: logs
-        run: while true ; do sleep 10 && docker container logs worker-test && docker container logs worker-test 2>& 1 | grep 'Coin found' && break ; done
+        run: while true ; do sleep 10 && docker container logs worker-test && docker container logs worker 2>& 1 | grep 'Coin found' && break ; done
