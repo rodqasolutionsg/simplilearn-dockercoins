@@ -61,8 +61,8 @@ services:
           - redis-network
        working_dir: /src
     worker:
-        command: worker.py
-        deploy: 
+       command: worker.py
+       deploy: 
           mode: replicated
           placement:
             constraints:
@@ -74,7 +74,7 @@ services:
           - redis-network
           - hasher-network
           - rng-network
-      working_dir: /src
+       working_dir: /src
 version: '3.8'    
 volumes:
     redis-volume:
