@@ -26,7 +26,7 @@ services:
          placement:
             constraints:
               - node.role == worker
-            replicas: 1
+         replicas: 1
        entrypoint: docker-entrypoint.sh
        image: redis:alpine
        networks:
@@ -69,7 +69,7 @@ services:
           placement:
             constraints:
               - node.role == worker
-          replicas: 2
+         replicas: 2
        entrypoint: python
        image: index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:1.0-worker
        networks:
