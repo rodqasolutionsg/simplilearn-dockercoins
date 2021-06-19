@@ -24,7 +24,7 @@ jobs:
       - name: network-rng
         run: docker network create rng-network
       - name: run-redis
-        run: docker container run --detach --entrypoint docker-entrypoint.sh --name redis-test --network redis-network --volume redis-volume:/data --workdir /data redis:alpine redis-server
+        run: docker container run --detach --entrypoint docker-entrypoint.sh --name redis --network redis-network --volume redis-volume:/data --workdir /data redis:alpine redis-server
       - name: run-hasher
         run: docker container run --detach --entrypoint ruby --name hasher --network hasher-network --workdir /src index.docker.io/rodqasolutionsg/simplilearn-dockercoins-2021-06:hasher hasher.rb
       - name: run-rng
