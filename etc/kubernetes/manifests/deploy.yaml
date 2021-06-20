@@ -1,1 +1,17 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplilearn-phpinfo-deploy
+spec:
+  selector:
+    matchLabels:
+      app: simplilearn-phpinfo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: simplilearn-phpinfo
+    spec:
+      containers:
+        - name: simplilearn-phpinfo-container
+          image: index.docker.io/pick2atl21/simplilearn-dockercoins-2021-06:1.0-hasher
